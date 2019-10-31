@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_27_092607) do
+ActiveRecord::Schema.define(version: 2019_10_30_215558) do
 
   create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "token"
@@ -18,17 +18,21 @@ ActiveRecord::Schema.define(version: 2019_10_27_092607) do
     t.integer "chats_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_applications_on_slug", unique: true
     t.index ["token"], name: "index_applications_on_token", unique: true
   end
 
   create_table "chats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "number"
     t.bigint "application_id"
-    t.integer "messages_count"
+    t.integer "messages_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["application_id", "number"], name: "index_chats_on_application_id_and_number", unique: true
     t.index ["application_id"], name: "index_chats_on_application_id"
+    t.index ["slug"], name: "index_chats_on_slug"
   end
 
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -38,8 +42,10 @@ ActiveRecord::Schema.define(version: 2019_10_27_092607) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["application_id"], name: "index_messages_on_application_id"
     t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["slug"], name: "index_messages_on_slug"
   end
 
   add_foreign_key "chats", "applications"

@@ -1,11 +1,16 @@
 class Application < ApplicationRecord
 	has_many :chats 
-	validates :token, uniqueness: true
+	validates :token, presence: true, uniqueness: true
 	validates :name , presence: true	
-
-	before_create :set_access_token 
+	validates :slug , presence: true
+	after_initialize :set_token , if: ->(app) { app.new_record? }
 
 	accepts_nested_attributes_for :chats
+
+  	extend FriendlyId
+  	friendly_id :token,  use: :slugged
+	
+	
 
 	def chat_counting
 		self.chats.size
@@ -13,9 +18,11 @@ class Application < ApplicationRecord
 
 	private
 
-	def set_access_token
-		self.token = generate_token
+	def set_token
+		token = generate_token
+		self.token = token
 	end
+
 
 	def generate_token
 		loop do
