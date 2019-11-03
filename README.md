@@ -26,17 +26,16 @@ Things you may want to cover:
 
 you can run the project with docker compose up 
 
-run the server  docker compose sudo docker-compose run app rails s
-
-you can 6 routes 
-
+you can access 6 routes 
 
 Create new application with name params 
 post /applicaition
 
+APPLICATION
 show the token of the application the id will be the token 
 GET  /applications/:id
 
+CHAT
 Create new chat with new number
 post /applications/:application_id/chats
 
@@ -44,6 +43,7 @@ show the chat with the number scoped with the token id of the application
 
 get /applications/:application_id/chats/:id #
 
+MESSAGE
 show the message of id is number chat id is the number of the chat and application id will be the token
 GET  /applications/:application_id/chats/:chat_id/messages/:id
 
