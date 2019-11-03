@@ -2,9 +2,16 @@ class ApplicationsController < ApplicationController
 
 	before_action :set_app, only: [:show, :update, :destroy]
 
+	
+	def index
+		message = "asdasdas".to_json
+		json_response(message, :ok)
+	end
+
+
 	def create
 	    @application = Application.create(application_params) 
-	    byebug
+	    # byebug
 	    application_token = @application.token.to_json
 		json_response(application_token, :created)
 	end
