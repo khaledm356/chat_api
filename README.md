@@ -23,3 +23,34 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+you can run the project with docker compose up 
+
+run the server  docker compose sudo docker-compose run app rails s
+
+you can 6 routes 
+
+
+Create new application with name params 
+post /applicaition
+
+show the token of the application the id will be the token 
+GET  /applications/:id
+
+Create new chat with new number
+post /applications/:application_id/chats
+
+show the chat with the number scoped with the token id of the application 
+
+get /applications/:application_id/chats/:id #
+
+show the message of id is number chat id is the number of the chat and application id will be the token
+GET  /applications/:application_id/chats/:chat_id/messages/:id
+
+you can send in th url the token for the application_id and chat number for the chat_id and then in body we will have a params name body 
+POST  /applications/:application_id/chats/:chat_id/messages
+
+
+you can also run the specs
+
+docker compose sudo docker-compose run app rspec 
